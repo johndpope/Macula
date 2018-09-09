@@ -73,16 +73,32 @@ func /(_ v1: Vector, _ v2: Vector) -> Vector {
     return Vector(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z)
 }
 
-func *(_ v1: Vector, _ s: Double) -> Vector {
-    return Vector(v1.x * s, v1.y * s, v1.z * s)
+func *(_ v: Vector, _ s: Double) -> Vector {
+    return Vector(v.x * s, v.y * s, v.z * s)
 }
 
-func /(_ v1: Vector, _ d: Double) -> Vector {
+func *(_ s: Double, _ v: Vector) -> Vector {
+    return v * s
+}
+
+func /(_ v: Vector, _ d: Double) -> Vector {
     guard d != 0 else {
         return Vector.zero
     }
 
-    return Vector(v1.x / d, v1.y / d, v1.z / d)
+    return Vector(v.x / d, v.y / d, v.z / d)
+}
+
+func dot(_ v1: Vector, _ v2: Vector) -> Double {
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+}
+
+func cross(_ v1: Vector, _ v2: Vector) -> Vector {
+    return Vector(
+        v1.y * v2.z - v1.z * v2.y,
+        -(v1.x * v2.z - v1.z * v2.x),
+        v1.x * v2.y - v1.y * v2.x
+    )
 }
 
 extension Vector: CustomStringConvertible {
