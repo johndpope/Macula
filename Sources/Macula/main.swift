@@ -18,14 +18,17 @@ let dbl_nx = Double(nx)
 let dbl_ny = Double(ny)
 
 for j in stride(from: ny-1, through: 0, by: -1) {
-	let jj = Double(j)
-	for i in 0..<nx {
-		let ii = Double(i)
-
-		let r = Int((ii / dbl_nx) * 255.99)
-		let g = Int((jj / dbl_ny) * 255.99)
-		let b = Int(0.2 * 255.99)
-
-		output("\(r) \(g) \(b)")
-	}
+    let jj = Double(j)
+    for i in 0..<nx {
+        let ii = Double(i)
+        
+        let color = Color(ii / dbl_nx, jj / dbl_ny, 0.2)
+        let (rr, gg, bb) = color.scale()
+        
+        let r = Int(rr)
+        let g = Int(gg)
+        let b = Int(bb)
+        
+        output("\(r) \(g) \(b)")
+    }
 }
