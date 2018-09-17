@@ -10,8 +10,25 @@ import Foundation
 let nx = 200
 let ny = 100
 
+extension Ray {
+	public func doesHitSphere(center: Vector, radius: Double) -> Bool {
+		let oc = self.origin - center
+		let a = dot(self.direction, self.direction)
+		let b = 2.0 * dot(oc, self.direction)
+		let c = dot(oc, oc) - radius * radius
+		let discriminant = b*b - 4*a*c
+
+		return discriminant > 0
+	}
+}
+
 extension Color {
     public init(_ ray: Ray) {
+		if ray.doesHitSphere(center: Vector(0,0,-1), radius: 0.5) {
+			self.init(1,0,0)
+			return
+		}
+
         let unitDirection = ray.direction.normalized()
         let t = 0.5 * (unitDirection.y + 1.0)
 
